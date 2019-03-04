@@ -1,3 +1,4 @@
+use std::io;
 // struct Name {
 //     _name : String
 // }
@@ -25,4 +26,15 @@ fn main(){
     for i in my_vector {
         println!("Poop {}", i);
     }
+
+    println!("guess a number dude");
+    let mut guess_result = String::new();
+    io::stdin().read_line(&mut guess_result)
+        .expect("Failed to read line");
+
+    if guess_result.trim() == "y".to_string() {
+        println!("woooo");
+    } else {
+        println!("type y instead of {}", guess_result);
+    };
 }
