@@ -29,6 +29,7 @@ struct Hero {
     damage: i32,
 }
 
+
 impl std::fmt::Display for Hero {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}, {}", self.hp, self.damage)
@@ -40,7 +41,8 @@ fn build_hero(name: String) -> Hero {
     let hp =  rng.gen_range(5, 15);
     let damage =  rng.gen_range(1, 5);
 
-    let hero = Hero{
+
+    let hero = Hero {
         name: name,
         hp: hp,
         damage: damage
@@ -53,8 +55,11 @@ fn main(){
     // //wtf no default constructors or anything. Rust sucks man. Josh Dec 20, 2018
     // let josh = Hero{name: Name{_name:"".to_string()}};
 
-    let hero = build_hero(String::from("Heroic Name"));
-    println!("Hero: {}", hero);
+    let names = vec!["Josh", "Matt"];
+    for name in names {
+        let hero = build_hero(String::from(name));
+        println!("{}: {}", hero.name, hero);
+    }
 
 
 
