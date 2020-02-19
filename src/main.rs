@@ -148,7 +148,7 @@ fn main(){
 
     // let res = serialize();
     let mut actor = build_actor(String::from("Hero"));
-    actor.behaviours.push(Box::new(BehaveEat{actor: Some(&mut actor)}));
+    // actor.behaviours.push(Box::new(BehaveEat{actor: Some(&mut actor)}));
     for behaviour in actor.behaviours {
         let behave_result = behaviour.do_behaviour();
         println!("Behaviour {} resulted: '{}'", behaviour, behave_result);
