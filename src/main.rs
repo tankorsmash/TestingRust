@@ -11,6 +11,11 @@ use rand::Rng;
 use std::fmt;
 use std::io;
 
+use std::cell::Cell;
+use std::rc::{Rc, Weak};
+use std::cell::RefCell;
+
+
 
 // #[derive(Serialize, Deserialize, Debug)]
 // #[derive(Debug)]
@@ -143,16 +148,35 @@ fn serialize() -> Result<String> {
     return Ok(String::from("success"));
 }
 
-fn main(){
-    println!("Running...");
-
+fn behave_testing()
+{
     // let res = serialize();
-    let mut actor = build_actor(String::from("Hero"));
+    let actor = build_actor(String::from("Hero"));
     // actor.behaviours.push(Box::new(BehaveEat{actor: Some(&mut actor)}));
     for behaviour in actor.behaviours {
         let behave_result = behaviour.do_behaviour();
         println!("Behaviour {} resulted: '{}'", behaviour, behave_result);
     }
+}
+
+struct Parent
+{
+    child: Child,
+}
+
+struct Child
+{
+    parent: Weak<RefCell<Parent>>,
+}
+
+
+fn main(){
+    println!("Running...");
+
+    let mut parent = Rc::new(RefCell::new(Parent {
+        child: Child{ parent: Weak::new() }
+    }));
+    parent.borrow_mut().child.parent = Rc::downgrade(&parent);
 
     println!("Done!");
 }
