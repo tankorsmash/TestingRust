@@ -17,7 +17,6 @@ use std::cell::RefCell;
 
 
 
-
 // #[derive(Serialize, Deserialize, Debug)]
 // #[derive(Debug)]
 pub trait Behaviour {
@@ -177,10 +176,6 @@ impl Testing for Parent {
     fn testing(&self) -> () {
         println!("testing");
     }
-}
-
-enum Direction {
-    LEFT, RIGHT
 }
 
 fn main(){
